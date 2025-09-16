@@ -79,13 +79,6 @@
       background: #1b5e20;
     }
 
-    video {
-      display: block;
-      margin: 20px auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    }
-
     #video p a {
       display: inline-block;
       margin-top: 10px;
@@ -102,7 +95,16 @@
       background: #0d47a1;
     }
 
-    /* ----- Styled Contact Form ----- */
+    #gallery img:hover {
+      transform: scale(1.2) rotate(5deg);
+      transition: transform 0.4s ease;
+    }
+
+    .video-container video:hover {
+      transform: rotateY(15deg) scale(1.05);
+      transition: transform 0.5s ease;
+    }
+
     form {
       background: #e8f5e9;
       padding: 20px;
@@ -157,6 +159,32 @@
       padding: 1rem;
       margin-top: 20px;
     }
+
+    .video-container {
+      text-align: center;
+    }
+
+    .video-container video {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    #js-demo button, #counter-demo button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background: #2e7d32;
+      color: white;
+      transition: background 0.3s ease;
+    }
+
+    #js-demo button:hover, #counter-demo button:hover {
+      background: #1b5e20;
+    }
+
   </style>
 </head>
 <body>
@@ -165,7 +193,8 @@
     <nav>
       <a href="#about">About</a> |
       <a href="#gallery">Gallery</a> |
-      <a href="#video">Video</a>
+      <a href="#video">Video</a> |
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
@@ -194,17 +223,36 @@
 
     <section id="video">
       <h2>Video</h2>
-      <video controls width="750">
-        <source src="292827.mp4" type="video/mp4">
-      </video>
-      <p><a href="https://pixabay.com/videos/id-292827/" target="_blank">Moraine Lake, Banff National Park, Canada</a></p>
-      <p>Credit to the owner of the video and image from 
-        <a href="https://pixabay.com/videos/" target="_blank" rel="noopener">Pixabay</a> and 
-        <a href="https://www.pexels.com/videos/" target="_blank" rel="noopener">Pexels</a>.
-      </p>
+      <div class="video-container">
+        <video controls width="750">
+          <source src="292827.mp4" type="video/mp4">
+        </video>
+        <p><a href="https://pixabay.com/videos/id-292827/" target="_blank">Moraine Lake, Banff National Park, Canada</a></p>
+        <p>Credit to the owner of the video and image from 
+          <a href="https://pixabay.com/videos/" target="_blank" rel="noopener">Pixabay</a> and 
+          <a href="https://www.pexels.com/videos/" target="_blank" rel="noopener">Pexels</a>.
+        </p>
+      </div>
     </section>
-	
-    <!-- Contact Section with Styled Form -->
+
+    <section id="js-demo">
+      <h2>JavaScript Sample</h2>
+      <button onclick="changeBackground()">Change Background</button>
+      <button onclick="showAlert()">Show Alert</button>
+      <button onclick="toggleGallery()">Toggle Gallery</button>
+    </section>
+
+    <section id="counter-demo">
+      <h2>Click Counter</h2>
+      <button onclick="increaseCounter()">Click Me!</button>
+      <p id="counterDisplay">Button clicked: 0 times</p>
+    </section>
+
+    <section id="clock-demo">
+      <h2>Digital Clock</h2>
+      <p id="clockDisplay"></p>
+    </section>
+
     <section id="contact">
       <h2>Contact</h2>
       <form>
@@ -219,5 +267,35 @@
   <footer>
     <p>&copy; Najie Medina</p>
   </footer>
+
+  <script>
+    function changeBackground() {
+      document.body.style.background = 
+        document.body.style.background === "lightblue" ? "#f5f9f6" : "lightblue";
+    }
+
+    function showAlert() {
+      alert("Hello! Welcome to The Nature Collection!! ");
+    }
+
+    function toggleGallery() {
+      const gallery = document.getElementById("gallery");
+      gallery.style.display = gallery.style.display === "none" ? "block" : "none";
+    }
+
+    let count = 0;
+    function increaseCounter() {
+      count++;
+      document.getElementById("counterDisplay").textContent = "Button clicked: " + count + " times";
+    }
+
+    function updateClock() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString();
+      document.getElementById("clockDisplay").textContent = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock(); // run immediately
+  </script>
 </body>
 </html>
